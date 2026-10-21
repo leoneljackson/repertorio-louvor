@@ -9,6 +9,7 @@
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --primary-color: #bb86fc;
+            --secondary-color: #03dac6;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
             --accent: #03dac6;
@@ -68,7 +69,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .btn-instrument {
@@ -95,8 +96,53 @@
             box-shadow: 0 0 10px rgba(187, 134, 252, 0.4);
         }
 
+        .sub-group {
+            background: #161616;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px dashed #333;
+            display: none;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .sub-group.show {
+            display: flex;
+        }
+
+        .sub-group span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: bold;
+            min-width: 70px;
+        }
+
+        .btn-sub {
+            background-color: #262626;
+            color: var(--text-main);
+            border: 1px solid #444;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-sub:hover {
+            background-color: #333;
+        }
+
+        .btn-sub.active {
+            background-color: var(--secondary-color);
+            color: #121212;
+            border-color: var(--secondary-color);
+            font-weight: bold;
+        }
+
         .player-section {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: #181818;
             padding: 15px;
             border-radius: 8px;
@@ -113,6 +159,15 @@
         audio {
             width: 100%;
             outline: none;
+        }
+
+        .metronome-section {
+            margin-bottom: 15px;
+            background: #161616;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #282828;
         }
 
         .lyrics-container {
@@ -155,96 +210,348 @@
 
     <div class="container">
         <header>
-            <h1>Repertório da Banda</h1>
+            <h1>Repertório para ensaio</h1>
             <p>Selecione seu instrumento para ensaiar com a trilha dedicada</p>
         </header>
 
+        <!-- MÚSICA 1: Firmeza na Fé -->
         <div class="song-card" id="musica-1">
-            <h2 class="song-title">Firmeza na Fé</h2>
-            
+            <h2 class="song-title">1. Firmeza na Fé</h2>
             <div class="instruments-grid">
-                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
-                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'violao', 'Trilha: Violão')">Toco violão</button>
-                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'teclado', 'Trilha: Teclado')">Toco teclado</button>
-                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'guitarra', 'Trilha: Guitarra')">Toco guitarra</button>
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 1, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 1, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 1, 'teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 1, 'guitarra')">Toco guitarra</button>
             </div>
-
+            <div class="sub-group" id="submenu-teclado-1">
+                <span>Teclado:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 1, 'teclado', 'Trilha: Teclado Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 1, 'teclado_isolado', 'Trilha: Teclado Isolado')">Teclado isolado</button>
+            </div>
+            <div class="sub-group" id="submenu-guitarra-1">
+                <span>Guitarra:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 1, 'guitarra', 'Trilha: Guitarra Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 1, 'guitarra_isolado', 'Trilha: Guitarra Isolado')">Guitarra isolado</button>
+            </div>
             <div class="player-section">
                 <div class="player-status" id="status-1">Selecione uma opção acima para carregar o áudio</div>
-                <audio id="audio-1" controls preload="auto">
-                    <source id="source-1" src="" type="audio/mpeg">
-                    Seu navegador não suporta o elemento de áudio.
-                </audio>
+                <audio id="audio-1" controls preload="auto"><source id="source-1" src="" type="audio/mpeg"></audio>
             </div>
-
+            <div class="metronome-section">
+                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button class="btn-sub" onclick="mudarBPM(-5, 1)">-5</button>
+                    <span id="bpm-display-1" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
+                    <button class="btn-sub" onclick="mudarBPM(5, 1)">+5</button>
+                    <button class="btn-sub" id="btn-metro-1" onclick="toggleMetronomo(1)">Iniciar</button>
+                </div>
+            </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
-                <div class="lyrics-text">Somente ponho a minha fé
-Na graça excelsa de Jesus
-No sacrifício remidor
-No sangue do bom Redentor
-A minha fé, e o meu amor
-Estão firmados no Senhor
-Estão firmados no Senhor
-Se lhe não posso a face ver
-É pela fé, que vou viver
-Em cada prova, suportar
-Eu hei de Nele confiar
-A minha fé e o meu amor
-Estão firmados no Senhor
-Estão firmados no Senhor
-A sua graça é real
-Abrigo traz, no temporal
-Ao vir cercar-me a tentação
-Me fortalece, a sua mão
-A minha fé e o meu amor
-Estão firmados no Senhor
-Estão firmados no Senhor
-Quando a trombeta ressoar
-Irei com Ele me encontrar
-E, com os salvos, cantarei
-Louvor eterno, ao grande Rei
-A minha fé e o meu amor
-Estão firmados no Senhor
-Estão firmados no Senhor
-A minha fé e o meu amor
-Estão firmados no Senhor
-Estão firmados no Senhor</div>
+                <div class="lyrics-text">Somente ponho a minha fé[cite: 1]
+Na graça excelsa de Jesus[cite: 1]
+No sacrifício remidor[cite: 1]
+No sangue do bom Redentor[cite: 1]
+A minha fé, e o meu amor[cite: 1]
+Estão firmados no Senhor[cite: 1]</div>
             </div>
         </div>
+
+        <!-- MÚSICA 2: Castelo Forte -->
+        <div class="song-card" id="musica-2">
+            <h2 class="song-title">2. Castelo Forte</h2>
+            <div class="instruments-grid">
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 2, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 2, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 2, 'teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 2, 'guitarra')">Toco guitarra</button>
+            </div>
+            <div class="sub-group" id="submenu-teclado-2">
+                <span>Teclado:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 2, 'teclado', 'Trilha: Teclado Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 2, 'teclado_isolado', 'Trilha: Teclado Isolado')">Teclado isolado</button>
+            </div>
+            <div class="sub-group" id="submenu-guitarra-2">
+                <span>Guitarra:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 2, 'guitarra', 'Trilha: Guitarra Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 2, 'guitarra_isolado', 'Trilha: Guitarra Isolado')">Guitarra isolado</button>
+            </div>
+            <div class="player-section">
+                <div class="player-status" id="status-2">Selecione uma opção acima para carregar o áudio</div>
+                <audio id="audio-2" controls preload="auto"><source id="source-2" src="" type="audio/mpeg"></audio>
+            </div>
+            <div class="metronome-section">
+                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button class="btn-sub" onclick="mudarBPM(-5, 2)">-5</button>
+                    <span id="bpm-display-2" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
+                    <button class="btn-sub" onclick="mudarBPM(5, 2)">+5</button>
+                    <button class="btn-sub" id="btn-metro-2" onclick="toggleMetronomo(2)">Iniciar</button>
+                </div>
+            </div>
+            <div class="lyrics-container">
+                <div class="lyrics-title">Letra / Cifra</div>
+                <div class="lyrics-text">Castelo forte é o nosso Deus
+Escudo e boa espada
+Com seu poder defende os seus, a sua igreja amada</div>
+            </div>
+        </div>
+
+        <!-- MÚSICA 3: Estamos de Pé -->
+        <div class="song-card" id="musica-3">
+            <h2 class="song-title">3. Estamos de Pé</h2>
+            <div class="instruments-grid">
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 3, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 3, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 3, 'teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 3, 'guitarra')">Toco guitarra</button>
+            </div>
+            <div class="sub-group" id="submenu-teclado-3">
+                <span>Teclado:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 3, 'teclado', 'Trilha: Teclado Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 3, 'teclado_isolado', 'Trilha: Teclado Isolado')">Teclado isolado</button>
+            </div>
+            <div class="sub-group" id="submenu-guitarra-3">
+                <span>Guitarra:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 3, 'guitarra', 'Trilha: Guitarra Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 3, 'guitarra_isolado', 'Trilha: Guitarra Isolado')">Guitarra isolado</button>
+            </div>
+            <div class="player-section">
+                <div class="player-status" id="status-3">Selecione uma opção acima para carregar o áudio</div>
+                <audio id="audio-3" controls preload="auto"><source id="source-3" src="" type="audio/mpeg"></audio>
+            </div>
+            <div class="metronome-section">
+                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button class="btn-sub" onclick="mudarBPM(-5, 3)">-5</button>
+                    <span id="bpm-display-3" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
+                    <button class="btn-sub" onclick="mudarBPM(5, 3)">+5</button>
+                    <button class="btn-sub" id="btn-metro-3" onclick="toggleMetronomo(3)">Iniciar</button>
+                </div>
+            </div>
+            <div class="lyrics-container">
+                <div class="lyrics-title">Letra / Cifra</div>
+                <div class="lyrics-text">Pressionados, mas não desanimados
+Perplexos, mas não desesperados
+Estamos de pé</div>
+            </div>
+        </div>
+
+        <!-- MÚSICA 4: Teu Povo -->
+        <div class="song-card" id="musica-4">
+            <h2 class="song-title">4. Teu Povo</h2>
+            <div class="instruments-grid">
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 4, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 4, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 4, 'teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 4, 'guitarra')">Toco guitarra</button>
+            </div>
+            <div class="sub-group" id="submenu-teclado-4">
+                <span>Teclado:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 4, 'teclado', 'Trilha: Teclado Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 4, 'teclado_isolado', 'Trilha: Teclado Isolado')">Teclado isolado</button>
+            </div>
+            <div class="sub-group" id="submenu-guitarra-4">
+                <span>Guitarra:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 4, 'guitarra', 'Trilha: Guitarra Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 4, 'guitarra_isolado', 'Trilha: Guitarra Isolado')">Guitarra isolado</button>
+            </div>
+            <div class="player-section">
+                <div class="player-status" id="status-4">Selecione uma opção acima para carregar o áudio</div>
+                <audio id="audio-4" controls preload="auto"><source id="source-4" src="" type="audio/mpeg"></audio>
+            </div>
+            <div class="metronome-section">
+                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button class="btn-sub" onclick="mudarBPM(-5, 4)">-5</button>
+                    <span id="bpm-display-4" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
+                    <button class="btn-sub" onclick="mudarBPM(5, 4)">+5</button>
+                    <button class="btn-sub" id="btn-metro-4" onclick="toggleMetronomo(4)">Iniciar</button>
+                </div>
+            </div>
+            <div class="lyrics-container">
+                <div class="lyrics-title">Letra / Cifra</div>
+                <div class="lyrics-text">Somos Teu povo, a Tua igreja
+Tua luz brilha sobre nós</div>
+            </div>
+        </div>
+
+        <!-- MÚSICA 5: Meu Respirar -->
+        <div class="song-card" id="musica-5">
+            <h2 class="song-title">5. Meu Respirar</h2>
+            <div class="instruments-grid">
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 5, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="selecionarInstrumento(this, 5, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 5, 'teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="toggleSubMenu(this, 5, 'guitarra')">Toco guitarra</button>
+            </div>
+            <div class="sub-group" id="submenu-teclado-5">
+                <span>Teclado:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 5, 'teclado', 'Trilha: Teclado Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 5, 'teclado_isolado', 'Trilha: Teclado Isolado')">Teclado isolado</button>
+            </div>
+            <div class="sub-group" id="submenu-guitarra-5">
+                <span>Guitarra:</span>
+                <button class="btn-sub active" onclick="selecionarSubFaixa(this, 5, 'guitarra', 'Trilha: Guitarra Padrão')">Padrão</button>
+                <button class="btn-sub" onclick="selecionarSubFaixa(this, 5, 'guitarra_isolado', 'Trilha: Guitarra Isolado')">Guitarra isolado</button>
+            </div>
+            <div class="player-section">
+                <div class="player-status" id="status-5">Selecione uma opção acima para carregar o áudio</div>
+                <audio id="audio-5" controls preload="auto"><source id="source-5" src="" type="audio/mpeg"></audio>
+            </div>
+            <div class="metronome-section">
+                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button class="btn-sub" onclick="mudarBPM(-5, 5)">-5</button>
+                    <span id="bpm-display-5" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
+                    <button class="btn-sub" onclick="mudarBPM(5, 5)">+5</button>
+                    <button class="btn-sub" id="btn-metro-5" onclick="toggleMetronomo(5)">Iniciar</button>
+                </div>
+            </div>
+            <div class="lyrics-container">
+                <div class="lyrics-title">Letra / Cifra</div>
+                <div class="lyrics-text">Este é o meu respirar
+Este é o meu respirar
+Teu Santo Espírito
+Vivendo em mim</div>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // Mapeamento dos áudios locais
+        // MAPA DE LINKS DE ÁUDIO PARA CADA MÚSICA (1 a 5)
         const audiosMap = {
             1: {
-                canto: 'https://drive.google.com/file/d/1k16_t5GVl5UEY_fm_7sJjQy-uLKTVrpB/view?usp=drive_link',
-                violao: 'Firmeza-violao.mp3',
-                teclado: 'https://raw.githubusercontent.com/leoneljackson/repertorio-louvor/refs/heads/main/Firmeza-teclado.mp3',
-                guitarra: 'Firmeza-guitarra.mp3'
-            }
+                canto: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20voz.wav',
+                violao: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20violao.wav',
+                teclado: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20teclado.wav',
+                teclado_isolado: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20teclado%20isolado.wav',
+                guitarra: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20guitarra.wav',
+                guitarra_isolado: 'https://archive.org/download/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20guitarra%20isolada.wav'
+            },
+            2: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' },
+            3: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' },
+            4: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' },
+            5: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' }
         };
 
-        function trocarFaixa(botaoClicado, numMusica, instrumento, nomeExibicao) {
+        // LÓGICA DO PLAYER E INSTRUMENTOS
+        function selecionarInstrumento(botaoClicado, numMusica, instrumento, nomeExibicao) {
+            const card = document.getElementById(`musica-${numMusica}`);
+            card.querySelectorAll('.sub-group').forEach(sub => sub.classList.remove('show'));
+            card.querySelectorAll('.btn-instrument, .btn-sub').forEach(btn => btn.classList.remove('active'));
+            botaoClicado.classList.add('active');
+            tocarAudio(numMusica, instrumento, nomeExibicao);
+        }
+
+        function toggleSubMenu(botaoClicado, numMusica, instrumentoBase) {
+            const card = document.getElementById(`musica-${numMusica}`);
+            card.querySelectorAll('.sub-group').forEach(sub => sub.classList.remove('show'));
+            const subMenu = document.getElementById(`submenu-${instrumentoBase}-${numMusica}`);
+            if (subMenu) subMenu.classList.add('show');
+
+            card.querySelectorAll('.btn-instrument').forEach(btn => btn.classList.remove('active'));
+            botaoClicado.classList.add('active');
+
+            const botaoPadrao = subMenu.querySelector('.btn-sub');
+            card.querySelectorAll('.btn-sub').forEach(btn => btn.classList.remove('active'));
+            if(botaoPadrao) botaoPadrao.classList.add('active');
+
+            tocarAudio(numMusica, instrumentoBase, `Trilha: ${instrumentoBase.charAt(0).toUpperCase() + instrumentoBase.slice(1)} Padrão`);
+        }
+
+        function selecionarSubFaixa(botaoClicado, numMusica, instrumentoChave, nomeExibicao) {
+            const card = document.getElementById(`musica-${numMusica}`);
+            card.querySelectorAll('.btn-sub').forEach(btn => btn.classList.remove('active'));
+            botaoClicado.classList.add('active');
+            tocarAudio(numMusica, instrumentoChave, nomeExibicao);
+        }
+
+        function tocarAudio(numMusica, instrumento, nomeExibicao) {
             const audioPlayer = document.getElementById(`audio-${numMusica}`);
             const sourceElement = document.getElementById(`source-${numMusica}`);
             const statusElement = document.getElementById(`status-${numMusica}`);
             
-            const card = document.getElementById(`musica-${numMusica}`);
-            const botoes = card.querySelectorAll('.btn-instrument');
-
-            // Remove a seleção de todos os botões e ativa apenas o clicado
-            botoes.forEach(btn => btn.classList.remove('active'));
-            botaoClicado.classList.add('active');
-
-            // Define o arquivo de áudio correspondente
             const caminhoArquivo = audiosMap[numMusica][instrumento];
-            
             sourceElement.src = caminhoArquivo;
             audioPlayer.pause();
             audioPlayer.load();
-            
             statusElement.textContent = nomeExibicao + " - Pronto para reproduzir";
+        }
+
+        // LÓGICA DO METRÔNOMO
+        const metroData = {};
+
+        function mudarBPM(valor, numMusica) {
+            if (!metroData[numMusica]) metroData[numMusica] = { bpm: 120, timer: null, rodando: false };
+            
+            metroData[numMusica].bpm += valor;
+            if (metroData[numMusica].bpm < 40) metroData[numMusica].bpm = 40;
+            if (metroData[numMusica].bpm > 240) metroData[numMusica].bpm = 240;
+            
+            document.getElementById(`bpm-display-${numMusica}`).textContent = metroData[numMusica].bpm + " BPM";
+            
+            if (metroData[numMusica].rodando) {
+                pararMetronomo(numMusica);
+                iniciarMetronomo(numMusica);
+            }
+        }
+
+        function toggleMetronomo(numMusica) {
+            if (!metroData[numMusica]) metroData[numMusica] = { bpm: 120, timer: null, rodando: false };
+            
+            const btn = document.getElementById(`btn-metro-${numMusica}`);
+            
+            if (metroData[numMusica].rodando) {
+                pararMetronomo(numMusica);
+                btn.textContent = "Iniciar";
+                btn.classList.remove('active');
+            } else {
+                iniciarMetronomo(numMusica);
+                btn.textContent = "Parar";
+                btn.classList.add('active');
+            }
+        }
+
+        function iniciarMetronomo(numMusica) {
+            const dados = metroData[numMusica];
+            dados.rodando = true;
+            const intervalo = (60 / dados.bpm) * 1000;
+            
+            tocarClickAudio();
+            dados.timer = setInterval(() => {
+                tocarClickAudio();
+            }, intervalo);
+        }
+
+        function pararMetronomo(numMusica) {
+            if (metroData[numMusica]) {
+                clearInterval(metroData[numMusica].timer);
+                metroData[numMusica].rodando = false;
+            }
+        }
+
+        function tocarClickAudio() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const envelope = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.value = 1000;
+                
+                envelope.gain.setValueAtTime(1, audioCtx.currentTime);
+                envelope.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                
+                osc.connect(envelope);
+                envelope.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch (e) {
+                console.log("Áudio do metrônomo aguardando interação.");
+            }
         }
     </script>
 </body>
