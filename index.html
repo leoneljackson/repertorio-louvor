@@ -235,20 +235,18 @@ Estão firmados no Senhor</div>
             const card = document.getElementById(`musica-${numMusica}`);
             const botoes = card.querySelectorAll('.btn-instrument');
 
-            // Marca o botão como ativo visualmente
             botoes.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Define o arquivo correspondente
             const caminhoArquivo = audiosMap[numMusica][instrumento];
-            
-            // Atualiza a fonte e força o recarregamento do player
             sourceElement.src = caminhoArquivo;
-            audioPlayer.pause();
-            audioPlayer.load();
             
-            // Atualiza o texto de status indicando qual trilha está pronta
-            statusElement.textContent = nomeExibicao + " - Pronto para reproduzir";
+            audioPlayer.load();
+            statusElement.textContent = nomeExibicao;
+            
+            audioPlayer.play().catch(e => {
+                console.log("Reprodução automática aguardando interação do usuário.");
+            });
         }
     </script>
 </body>
