@@ -160,13 +160,13 @@
         </header>
 
         <div class="song-card" id="musica-1">
-            <h2 class="song-title">Firmeza na Fé</h2>
+            <h2 class="song-title">Firmados no Senhor</h2>
             
             <div class="instruments-grid">
-                <button class="btn-instrument" onclick="trocarFaixa(1, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
-                <button class="btn-instrument" onclick="trocarFaixa(1, 'violao', 'Trilha: Violão')">Toco violão</button>
-                <button class="btn-instrument" onclick="trocarFaixa(1, 'teclado', 'Trilha: Teclado')">Toco teclado</button>
-                <button class="btn-instrument" onclick="trocarFaixa(1, 'guitarra', 'Trilha: Guitarra')">Toco guitarra</button>
+                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'teclado', 'Trilha: Teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="trocarFaixa(this, 1, 'guitarra', 'Trilha: Guitarra')">Toco guitarra</button>
             </div>
 
             <div class="player-section">
@@ -215,10 +215,8 @@ Estão firmados no Senhor</div>
     </div>
 
     <script>
-        // Mude os links abaixo para o caminho dos seus arquivos MP3 reais (ex: 'audios/canto.mp3')
-        // Se quiser testar agora, pode usar links de arquivos MP3 públicos da internet
+        // Mapeamento dos áudios locais
         const audiosMap = {
-            const audiosMap = {
             1: {
                 canto: 'leoneljackson/repertorio-louvor/Firmeza-vocal.mp3',
                 violao: 'leoneljackson/repertorio-louvor/Firmeza-violao.mp3',
@@ -227,7 +225,7 @@ Estão firmados no Senhor</div>
             }
         };
 
-        function trocarFaixa(numMusica, instrumento, nomeExibicao) {
+        function trocarFaixa(botaoClicado, numMusica, instrumento, nomeExibicao) {
             const audioPlayer = document.getElementById(`audio-${numMusica}`);
             const sourceElement = document.getElementById(`source-${numMusica}`);
             const statusElement = document.getElementById(`status-${numMusica}`);
@@ -235,18 +233,18 @@ Estão firmados no Senhor</div>
             const card = document.getElementById(`musica-${numMusica}`);
             const botoes = card.querySelectorAll('.btn-instrument');
 
+            // Remove a seleção de todos os botões e ativa apenas o clicado
             botoes.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            botaoClicado.classList.add('active');
 
+            // Define o arquivo de áudio correspondente
             const caminhoArquivo = audiosMap[numMusica][instrumento];
+            
             sourceElement.src = caminhoArquivo;
-            
+            audioPlayer.pause();
             audioPlayer.load();
-            statusElement.textContent = nomeExibicao;
             
-            audioPlayer.play().catch(e => {
-                console.log("Reprodução automática aguardando interação do usuário.");
-            });
+            statusElement.textContent = nomeExibicao + " - Pronto para reproduzir";
         }
     </script>
 </body>
