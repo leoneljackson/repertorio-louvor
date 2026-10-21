@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repertório - Backtracks e Ensaios</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --primary-color: #bb86fc;
+            --primary-hover: #3700b3;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #03dac6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .song-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid #2c2c2c;
+        }
+
+        .song-title {
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #ffffff;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 10px;
+        }
+
+        .instruments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-instrument {
+            background-color: #2c2c2c;
+            color: var(--text-main);
+            border: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-instrument:hover {
+            background-color: #383838;
+            transform: translateY(-2px);
+        }
+
+        .btn-instrument.active {
+            background-color: var(--primary-color);
+            color: #121212;
+            box-shadow: 0 0 10px rgba(187, 134, 252, 0.4);
+        }
+
+        .player-section {
+            margin-bottom: 20px;
+            background: #181818;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .player-status {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        audio {
+            width: 100%;
+            outline: none;
+        }
+
+        .lyrics-container {
+            background-color: #161616;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 180px;
+            overflow-y: auto;
+            border: 1px solid #252525;
+        }
+
+        .lyrics-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lyrics-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-line;
+            color: #d0d0d0;
+        }
+
+        /* Barra de rolagem personalizada */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Repertório da Banda</h1>
+            <p>Selecione seu instrumento para ensaiar com a trilha dedicada</p>
+        </header>
+
+        <!-- MÚSICA 1: Pronta para uso -->
+        <div class="song-card" id="musica-1">
+            <h2 class="song-title">Firmados no Senhor</h2>
+            
+            <div class="instruments-grid">
+                <button class="btn-instrument" onclick="trocarFaixa(1, 'canto', 'Trilha: Canto / Vocal')">Canto</button>
+                <button class="btn-instrument" onclick="trocarFaixa(1, 'violao', 'Trilha: Violão')">Toco violão</button>
+                <button class="btn-instrument" onclick="trocarFaixa(1, 'teclado', 'Trilha: Teclado')">Toco teclado</button>
+                <button class="btn-instrument" onclick="trocarFaixa(1, 'guitarra', 'Trilha: Guitarra')">Toco guitarra</button>
+            </div>
+
+            <div class="player-section">
+                <div class="player-status" id="status-1">Selecione uma opção acima para carregar o áudio</div>
+                <!-- ATENÇÃO: Substitua os caminhos abaixo pelos arquivos de áudio reais da produção -->
+                <audio id="audio-1" controls>
+                    <source id="source-1" src="" type="audio/mpeg">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+            </div>
+
+            <div class="lyrics-container">
+                <div class="lyrics-title">Letra / Cifra</div>
+                <div class="lyrics-text">Somente ponho a minha fé na graça excelsa de Jesus, no sacrifício remidor, no sangue do bom redentor. A minha fé e o meu amor estão firmados no Senhor[cite: 1, 2, 3, 4, 5].
+
+Se não lhe posso ver, é pela fé que vou viver. Em cada prova suportar, eu dele confio[cite: 1, 2, 3, 4, 5]. A minha fé e o meu amor estão firmados no Senhor.
+
+A sua graça é real. Abrigo traz no temporal. Ao cercar minha tentação, me fortalece a sua mão. A minha fé e o meu amor estão firmados no Senhor[cite: 1, 2, 3, 4, 5].
+
+Quando a trombeta ressoar, irei com ele me encontrar e com os salvos cantarei louvor eterno ao grande rei[cite: 1, 2, 3, 4, 5]. A minha fé e o meu amor estão firmados no Senhor[cite: 1, 2, 3, 4, 5].</div>
+            </div>
+        </div>
+
+        <!-- 
+          QUANDO FOR ADICIONAR MAIS MÚSICAS:
+          Basta copiar o bloco <div class="song-card" id="musica-1">...</div> acima, 
+          colar abaixo mudando o ID para "musica-2", alterar o nome e os caminhos dos áudios!
+        -->
+
+    </div>
+
+    <script>
+        // Banco de caminhos dos arquivos de áudio por música e instrumento
+        // Quando os áudios estiverem prontos, basta colocar o link ou caminho do arquivo (ex: 'audios/musica1-violao.mp3')
+        const audiosMap = {
+            1: {
+                canto: 'audios/firmados-canto.mp3',
+                violao: 'audios/firmados-violao.mp3',
+                teclado: 'audios/firmados-teclado.mp3',
+                guitarra: 'audios/firmados-guitarra.mp3'
+            }
+            // Exemplo para a próxima música no futuro:
+            // 2: { canto: '...', violao: '...', teclado: '...', guitarra: '...' }
+        };
+
+        function trocarFaixa(numMusica, instrumento, nomeExibicao) {
+            const audioPlayer = document.getElementById(`audio-${numMusica}`);
+            const sourceElement = document.getElementById(`source-${numMusica}`);
+            const statusElement = document.getElementById(`status-${numMusica}`);
+            
+            // Pega o card da música específica
+            const card = document.getElementById(`musica-${numMusica}`);
+            const botoes = card.querySelectorAll('.btn-instrument');
+
+            // Remove a classe 'active' de todos os botões do card e adiciona no clicado
+            botoes.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Define a nova fonte de áudio com base no mapa
+            const caminhoArquivo = audiosMap[numMusica][instrumento];
+            sourceElement.src = caminhoArquivo;
+            
+            // Atualiza o player
+            audioPlayer.load();
+            statusElement.textContent = nomeExibicao;
+            
+            // Opcional: inicia a reprodução automaticamente ao trocar
+            audioPlayer.play().catch(e => {
+                console.log("Reprodução automática aguardando interação do usuário.");
+            });
+        }
+    </script>
+</body>
+</html>
