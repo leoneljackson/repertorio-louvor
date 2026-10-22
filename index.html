@@ -722,7 +722,7 @@ C/E G</pre>
                 guitarra_isolado: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20guitarra%20isolada.wav' }
         };
 
-        // CONFIGURAÇÕES EXATAS DE BPM E COMPASSO CORRIGIDAS
+        // CONFIGURAÇÕES CORRETAS EXATAMENTE CONFORME SOLICITADO AGORA
         const metronomeConfigs = {
             1: { bpm: 80,  beatsPerMeasure: 3 }, // 1: 80 bpm 3/4
             2: { bpm: 120, beatsPerMeasure: 4 }, // 2: 120 bpm 4/4
@@ -774,7 +774,7 @@ C/E G</pre>
             statusElement.textContent = nomeExibicao + " - Pronto para reproduzir";
         }
 
-        // LÓGICA DO METRÔNOMO CORRIGIDA
+        // LÓGICA DO METRÔNOMO
         const metroState = {};
 
         function toggleMetronomo(numMusica) {
@@ -801,7 +801,6 @@ C/E G</pre>
                 timer: null
             };
             
-            // Toca o primeiro tempo forte imediatamente
             tocarClick(true);
             metroState[numMusica].currentBeat = 1;
             
@@ -827,7 +826,6 @@ C/E G</pre>
                 const envelope = audioCtx.createGain();
                 
                 osc.type = 'sine';
-                // Primeiro tempo do compasso mais agudo/forte
                 osc.frequency.value = isFirstBeat ? 1200 : 800;
                 
                 envelope.gain.setValueAtTime(isFirstBeat ? 1.2 : 0.7, audioCtx.currentTime);
