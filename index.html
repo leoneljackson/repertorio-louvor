@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repertório - Backtracks e Ensaios</title>
+    <title>Repertório da Banda - Backtracks e Ensaios</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --primary-color: #bb86fc;
-            --secondary-color: #03dac6;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent: #03dac6;
+            --bg-color: #0b1329;
+            --card-bg: #131c38;
+            --primary-color: #2e86de;
+            --secondary-color: #00d2d3;
+            --text-main: #f1f2f6;
+            --text-muted: #a4b0be;
+            --accent: #00d2d3;
+            --border-color: #1e2952;
         }
 
         body {
@@ -40,6 +41,7 @@
         header h1 {
             color: var(--primary-color);
             margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(46, 134, 222, 0.4);
         }
 
         header p {
@@ -52,8 +54,8 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            border: 1px solid #2c2c2c;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            border: 1px solid var(--border-color);
         }
 
         .song-title {
@@ -61,7 +63,7 @@
             margin-top: 0;
             margin-bottom: 15px;
             color: #ffffff;
-            border-bottom: 2px solid #2c2c2c;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
         }
 
@@ -73,9 +75,9 @@
         }
 
         .btn-instrument {
-            background-color: #2c2c2c;
+            background-color: #1a2547;
             color: var(--text-main);
-            border: none;
+            border: 1px solid var(--border-color);
             padding: 12px 10px;
             border-radius: 8px;
             cursor: pointer;
@@ -86,22 +88,23 @@
         }
 
         .btn-instrument:hover {
-            background-color: #383838;
+            background-color: #243363;
             transform: translateY(-2px);
         }
 
         .btn-instrument.active {
             background-color: var(--primary-color);
-            color: #121212;
-            box-shadow: 0 0 10px rgba(187, 134, 252, 0.4);
+            color: #ffffff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 12px rgba(46, 134, 222, 0.6);
         }
 
         .sub-group {
-            background: #161616;
+            background: #0e152d;
             padding: 10px 12px;
             border-radius: 8px;
             margin-bottom: 10px;
-            border: 1px dashed #333;
+            border: 1px dashed var(--border-color);
             display: none;
             gap: 10px;
             flex-wrap: wrap;
@@ -120,9 +123,9 @@
         }
 
         .btn-sub {
-            background-color: #262626;
+            background-color: #162040;
             color: var(--text-main);
-            border: 1px solid #444;
+            border: 1px solid var(--border-color);
             padding: 8px 12px;
             border-radius: 6px;
             cursor: pointer;
@@ -131,22 +134,24 @@
         }
 
         .btn-sub:hover {
-            background-color: #333;
+            background-color: #202e59;
         }
 
         .btn-sub.active {
             background-color: var(--secondary-color);
-            color: #121212;
+            color: #0b1329;
             border-color: var(--secondary-color);
             font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 210, 211, 0.4);
         }
 
         .player-section {
             margin-bottom: 15px;
-            background: #181818;
+            background: #0e152d;
             padding: 15px;
             border-radius: 8px;
             text-align: center;
+            border: 1px solid var(--border-color);
         }
 
         .player-status {
@@ -163,11 +168,11 @@
 
         .metronome-section {
             margin-bottom: 15px;
-            background: #161616;
+            background: #0e152d;
             padding: 12px;
             border-radius: 8px;
             text-align: center;
-            border: 1px solid #282828;
+            border: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -181,9 +186,9 @@
         }
 
         .btn-metro {
-            background-color: #262626;
+            background-color: #162040;
             color: var(--text-main);
-            border: 1px solid #444;
+            border: 1px solid var(--border-color);
             padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
@@ -193,22 +198,22 @@
         }
 
         .btn-metro:hover {
-            background-color: #333;
+            background-color: #202e59;
         }
 
         .btn-metro.active {
             background-color: var(--secondary-color);
-            color: #121212;
+            color: #0b1329;
             border-color: var(--secondary-color);
         }
 
         .lyrics-container {
-            background-color: #161616;
+            background-color: #0e152d;
             border-radius: 8px;
             padding: 15px;
             max-height: 180px;
             overflow-y: auto;
-            border: 1px solid #252525;
+            border: 1px solid var(--border-color);
         }
 
         .lyrics-title {
@@ -233,10 +238,10 @@
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #121212;
+            background: var(--bg-color);
         }
         ::-webkit-scrollbar-thumb {
-            background: #333;
+            background: #202e59;
             border-radius: 3px;
         }
     </style>
@@ -245,7 +250,7 @@
 
     <div class="container">
         <header>
-            <h1>Repertório para ensaio</h1>
+            <h1>Repertório da Banda</h1>
             <p>Selecione seu instrumento para ensaiar com a trilha dedicada</p>
         </header>
 
@@ -324,6 +329,7 @@ Ao vir cercar-me a tenta - ção me fortalece a Sua mão
 A minha fé e o meu amor estão firmados no Senhor
          E/G# A B          E    C#m7 B E/G# A B E
 Estão firma - dos no Senhor
+
 
 [Quarta Parte]
 
@@ -675,14 +681,104 @@ C/E G</pre>
             </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
-                <pre class="lyrics-text">Este é o meu respirar...</pre>
+                <pre class="lyrics-text">Canto das Igrejas
+Tom: G
+
+                 Em       D/F#    G
+Somos teu povo, a tua igreja
+        C            Em     D
+Tua luz brilha sobre nós
+                 Em     D/F#    G
+O mesmo corpo, um só Espírito
+C          Em     D
+Um Senhor e Rei
+
+[Segunda Parte]
+
+                     C              Em
+Faça tua vontade através de nós
+                   D/F# G
+Que o teu reino venha
+                          D/F#
+Que o teu reino venha
+
+[Refrão]
+
+             G
+Tu és a luz que brilha sobre a escuridão
+             Em
+Tu és a paz que acalma todo coração
+         C                         Em
+És o pão do faminto, a força do aflito
+    D
+E nós somos teus pés e tuas mãos
+
+( Em  D/F#  G  C  Em  D )
+
+
+[Refrão 2]
+
+             G
+Tua verdade sempre permanecerá
+             Em
+Do teu amor quem poderá nos separar
+       C9                             Em
+És fiel e pra sempre, teu povo sustenta
+        D
+E então o mundo inteiro verá
+                              C
+O poder do grande Rei
+
+( C   G   D/F#  )
+
+
+[Ponte]
+
+C
+  Justiça e paz se encontram
+
+E nasce a alegria
+G
+Este é o Teu reino
+D/F#
+Este é o Teu reino
+
+( Em  D/F#  G )
+
+Ôoo ooo oooo ooo
+( C9  Em  D )
+
+Ooo o oo oô
+
+[Refrão]
+
+             G
+Tu és a luz que brilha sobre a escuridão
+             Em
+Tu és a paz que acalma todo coração
+         C                         Em
+És o pão do faminto, a força do aflito
+    D
+E nós somos teus pés e tuas mãos
+
+[Refrão 2]
+
+             G
+Tua verdade sempre permanecerá
+             Em
+Do teu amor quem poderá nos separar
+       C9                             Em
+És fiel e pra sempre, teu povo sustenta
+        D
+E então o mundo inteiro verá
+                              C
+O poder do grande Rei</pre>
             </div>
         </div>
 
     </div>
 
     <script>
-        // MAPA DE LINKS DE ÁUDIO
         const audiosMap = {
             1: {
                 canto: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20voz.wav',
