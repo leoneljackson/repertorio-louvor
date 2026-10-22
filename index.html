@@ -168,6 +168,38 @@
             border-radius: 8px;
             text-align: center;
             border: 1px solid #282828;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metronome-info {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .btn-metro {
+            background-color: #262626;
+            color: var(--text-main);
+            border: 1px solid #444;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .btn-metro:hover {
+            background-color: #333;
+        }
+
+        .btn-metro.active {
+            background-color: var(--secondary-color);
+            color: #121212;
+            border-color: var(--secondary-color);
         }
 
         .lyrics-container {
@@ -214,7 +246,7 @@
             <p>Selecione seu instrumento para ensaiar com a trilha dedicada</p>
         </header>
 
-        <!-- MÚSICA 1: Firmeza na Fé -->
+        <!-- MÚSICA 1 -->
         <div class="song-card" id="musica-1">
             <h2 class="song-title">1. Firmeza na Fé</h2>
             <div class="instruments-grid">
@@ -238,21 +270,83 @@
                 <audio id="audio-1" controls preload="auto"><source id="source-1" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                    <button class="btn-sub" onclick="mudarBPM(-1, 1)">-1</button>
-                    <span id="bpm-display-1" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
-                    <button class="btn-sub" onclick="mudarBPM(1, 1)">+1</button>
-                    <button class="btn-sub" id="btn-metro-1" onclick="toggleMetronomo(1)">Iniciar</button>
-                </div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-1" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 100 BPM</span></div>
+                <button class="btn-metro" id="btn-metro-1" onclick="toggleMetronomo(1)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
-                <div class="lyrics-text">Somente ponho a minha fé na graça excelsa de Jesus[cite: 1, 2, 3, 4, 5]...</div>
+                <div class="lyrics-text">Ipalpha
+Tom: E
+
+[Intro] E C#m7 B E/G#   A B E
+
+[Primeira Parte]
+
+          E      C#m7 B     E/G#    A      B    E
+Somente ponho a minha fé na graça excelsa de Jesus
+           E  C#m7 B          E/G#   A      B    E
+No sacrifício remi – dor. No sangue do bom Redentor
+
+[Refrão]
+
+         E            A         E      C#m7 B
+A minha fé e o meu amor estão firmados no Senhor
+        E/G# A B          E    C#m7 B E/G# A B E
+Estão firma - dos no Senhor
+
+[Segunda Parte]
+
+             E      C#m7 B     E/G# A      B    E
+Se não lhe posso a face ver é pela fé que vou viver
+           E  C#m7 B          E/G#   A     B    E
+Em cada prova supor – tar, eu hei de Nele confiar
+
+[Refrão]
+
+         E            A         E      C#m7 B
+A minha fé e o meu amor estão firmados no Senhor
+        E/G# A B          E    C#m7 B E/G# A B E
+Estão firma - dos no Senhor
+
+[Terceira Parte]
+
+        E   C#m7 B       E/G# A        B    E
+A Sua graça é re – al, abrigo traz no temporal
+            E       C#m7    B      E/G#   A    B  E
+Ao vir cercar-me a tenta - ção me fortalece a Sua mão
+
+[Refrão]
+
+         E            A         E      C#m7 B
+A minha fé e o meu amor estão firmados no Senhor
+        E/G# A B          E    C#m7 B E/G# A B E
+Estão firma - dos no Senhor
+
+
+[Quarta Parte]
+
+              E   C#m7 B    E/G# A       B       E
+Quando a trombeta ressoar, irei com Ele me encontrar
+E
+E com os salvos canta...rei, louvor eterno ao Grande Rei
+
+[Refrão]
+
+         E            A         E      C#m7 B
+A minha fé e o meu amor estão firmados no Senhor
+        E/G# A B          E    C#m7 B E/G# A B E
+Estão firma - dos no Senhor
+
+         E            A         E      C#m7 B
+A minha fé e o meu amor estão firmados no Senhor
+        E/G# A B          E    C#m7 B E/G# A B E
+Estão firma - dos no Senhor
+
+[Final] E C#m7 B E/G# A B E</div>
             </div>
         </div>
 
-        <!-- MÚSICA 2: Castelo Forte -->
+        <!-- MÚSICA 2 -->
         <div class="song-card" id="musica-2">
             <h2 class="song-title">2. Castelo Forte</h2>
             <div class="instruments-grid">
@@ -276,21 +370,62 @@
                 <audio id="audio-2" controls preload="auto"><source id="source-2" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                    <button class="btn-sub" onclick="mudarBPM(-1, 2)">-1</button>
-                    <span id="bpm-display-2" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
-                    <button class="btn-sub" onclick="mudarBPM(1, 2)">+1</button>
-                    <button class="btn-sub" id="btn-metro-2" onclick="toggleMetronomo(2)">Iniciar</button>
-                </div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-2" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 110 BPM</span></div>
+                <button class="btn-metro" id="btn-metro-2" onclick="toggleMetronomo(2)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
-                <div class="lyrics-text">Castelo forte é o nosso Deus...</div>
+                <div class="lyrics-text">IPALPHA
+Tom: A
+
+[Intro] A
+
+A                  D     A   F#m          D      A
+Castelo forte é o nosso Deus,   escudo e boa espada
+A                D        A    F#m       D        A
+Com Seu poder defende os Seus,   a sua igreja amada
+
+     F#m     D     A        F#m      D    A
+Com força e com furor, nos prova o tentador
+    F#m     D   A       F#m     D    C#m D
+Com artimanhas tais e astúcias infernais
+                           A D A
+Que iguais não há na Terra
+
+A              D    A   F#m        D       A
+A nossa força nada faz,  estamos, nós perdidos
+A                 D      A     F#m       D     A
+Mas nosso Deus socorro traz, e   somos protegidos
+   F#m   D     A      F#m    D      A
+Defende-nos Jesus, o que venceu na cruz
+    F#m     D     A         F#m      D     C#m D
+Senhor dos altos Céus, que sendo o próprio Deus
+                   A D A
+Triunfa na batalha
+
+A                   D   A   F#m       D       A
+Sim, que a palavra ficará,   sabemos com certeza
+A              D   A      F#m       D    A
+Pois ela nos ajudará, com    armas de defesa
+   F#m   D     A      F#m    D         A
+Se temos de perder, família, bens e poder
+    F#m   D    A       F#m   D     C#m D
+Embora a vida vá, por nós Jesus está
+                    A D A
+E nos dará Seu reino
+
+A                  D    A   Bm
+Castelo forte é o nosso Deus
+F#m       D               A
+ Castelo forte é o nosso Deus
+A                  D     A Bm
+Castelo forte é o nosso Deus
+F#m       D               A
+ Castelo forte é o nosso Deus</div>
             </div>
         </div>
 
-        <!-- MÚSICA 3: Estamos de Pé -->
+        <!-- MÚSICA 3 -->
         <div class="song-card" id="musica-3">
             <h2 class="song-title">3. Estamos de Pé</h2>
             <div class="instruments-grid">
@@ -314,21 +449,169 @@
                 <audio id="audio-3" controls preload="auto"><source id="source-3" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                    <button class="btn-sub" onclick="mudarBPM(-1, 3)">-1</button>
-                    <span id="bpm-display-3" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
-                    <button class="btn-sub" onclick="mudarBPM(1, 3)">+1</button>
-                    <button class="btn-sub" id="btn-metro-3" onclick="toggleMetronomo(3)">Iniciar</button>
-                </div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-3" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 120 BPM</span></div>
+                <button class="btn-metro" id="btn-metro-3" onclick="toggleMetronomo(3)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
-                <div class="lyrics-text">Pressionados, mas não desanimados...</div>
+                <div class="lyrics-text">Nazareno Central Music
+Tom: G
+[Intro] G G7(4/9) F C/E G
+G G7(4/9) F C/E G
+
+[Primeira Parte]
+G
+Pressionados, Mas não desanimados
+Em                         D
+ Perplexos, Mas não desesperados
+            G
+Estamos de pé
+G
+Perseguidos, Mas não abandonados
+Em                       D
+ Abatidos, Mas não destruídos
+G
+Estamos de pé
+
+[Refrão]
+
+G                        D
+Não caminhamos Pelo que vemos
+          Am                C
+O que nos move É o que nós cremos
+       G              D
+Nação Santa, somos a igreja
+             F C
+Vivemos por Fé
+            G  G7(4/9) F Am G
+Estamos de pé
+
+[Segunda Parte]
+
+G
+Perseguidos, Mas não abandonados
+Em                       D
+ Abatidos, Mas não destruídos
+            G
+Estamos de pé
+
+[Refrão]
+
+         G               D
+Não caminhamos Pelo que vemos
+           Am               C
+O que nos move É o que nós cremos
+       G               D
+Nação Santa, somos a igreja
+             F C
+Vivemos por Fé
+            G
+Estamos de pé
+
+[Ponte]
+
+G                             Dm7
+A perseguição não parou a igreja
+                           F
+O coliseu não parou a igreja
+
+Os leões não pararam
+              C/E
+A igreja do Senhor
+
+G
+O inferno não pode prevalecer
+Dm7
+ Vamos avançar
+
+Não vamos parar de crescer
+F
+ Ninguém pode parar
+            C/E
+A igreja do Senhor
+
+[Ponte 2]
+
+G                             Dm7
+A perseguição não parou a igreja
+                          F
+O coliseu não parou a igreja
+
+Os leões não pararam
+               Am
+A igreja do Senhor
+G
+O inferno não pode prevalecer
+Dm7
+ Vamos avançar
+
+Não vamos parar de crescer
+F
+ Ninguém pode parar
+            C/E
+A igreja do Senhor
+
+[Refrão]
+
+         G               D
+Não caminhamos Pelo que vemos
+           Am               C
+O que nos move É o que nós cremos
+       G               D
+Nação Santa, somos a igreja
+             F C
+Vivemos por Fé
+            G
+Estamos de pé
+
+[Ponte]
+
+G                             Dm7
+ A perseguição não parou a igreja
+                           F
+O coliseu não parou a igreja
+
+Os leões não pararam
+           Am
+A igreja do Senhor
+G
+ O inferno não pode prevalecer
+Dm7
+ Vamos avançar
+
+Não vamos parar de crescer
+F
+ Ninguém pode parar
+          Am
+A igreja do Senhor
+
+[Ponte]
+
+C/E                           F
+A perseguição não parou a igreja
+F
+O coliseu não parou a igreja
+
+Os leões não pararam
+             Am
+A igreja do Senhor
+G
+ O inferno não pode prevalecer
+Dm7
+ Vamos avançar
+
+Não vamos parar de crescer
+F
+ Ninguém pode parar
+             Am
+A igreja do Senhor
+
+[Final] G G7(4/9) F Am Em Dm F
+C/E G</div>
             </div>
         </div>
 
-        <!-- MÚSICA 4: Teu Povo -->
+        <!-- MÚSICA 4 -->
         <div class="song-card" id="musica-4">
             <h2 class="song-title">4. Teu Povo</h2>
             <div class="instruments-grid">
@@ -352,13 +635,8 @@
                 <audio id="audio-4" controls preload="auto"><source id="source-4" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                    <button class="btn-sub" onclick="mudarBPM(-1, 4)">-1</button>
-                    <span id="bpm-display-4" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
-                    <button class="btn-sub" onclick="mudarBPM(1, 4)">+1</button>
-                    <button class="btn-sub" id="btn-metro-4" onclick="toggleMetronomo(4)">Iniciar</button>
-                </div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-4" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 95 BPM</span></div>
+                <button class="btn-metro" id="btn-metro-4" onclick="toggleMetronomo(4)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
@@ -366,7 +644,7 @@
             </div>
         </div>
 
-        <!-- MÚSICA 5: Meu Respirar -->
+        <!-- MÚSICA 5 -->
         <div class="song-card" id="musica-5">
             <h2 class="song-title">5. Meu Respirar</h2>
             <div class="instruments-grid">
@@ -390,13 +668,8 @@
                 <audio id="audio-5" controls preload="auto"><source id="source-5" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div style="font-size: 0.8rem; color: var(--accent); margin-bottom: 5px; font-weight: bold;">METRÔNOMO</div>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                    <button class="btn-sub" onclick="mudarBPM(-1, 5)">-1</button>
-                    <span id="bpm-display-5" style="font-size: 1rem; font-weight: bold; min-width: 65px;">120 BPM</span>
-                    <button class="btn-sub" onclick="mudarBPM(1, 5)">+1</button>
-                    <button class="btn-sub" id="btn-metro-5" onclick="toggleMetronomo(5)">Iniciar</button>
-                </div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-5" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 3/4 | 72 BPM</span></div>
+                <button class="btn-metro" id="btn-metro-5" onclick="toggleMetronomo(5)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
                 <div class="lyrics-title">Letra / Cifra</div>
@@ -407,6 +680,7 @@
     </div>
 
     <script>
+        // MAPA DE LINKS DE ÁUDIO
         const audiosMap = {
             1: {
                 canto: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20voz.wav',
@@ -416,10 +690,42 @@
                 guitarra: 'https://ia601804.us.archive.org/1/items/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20guitarra.wav',
                 guitarra_isolado: 'https://archive.org/download/firmeza-na-fe-ipalpha-musica-teclado-isolado/Firmeza%20na%20Fé%20IPALPHA%20Música%20-%20guitarra%20isolada.wav'
             },
-            2: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' },
-            3: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' },
-            4: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' },
-            5: { canto: 'COLE_O_LINK_AQUI', violao: 'COLE_O_LINK_AQUI', teclado: 'COLE_O_LINK_AQUI', teclado_isolado: 'COLE_O_LINK_AQUI', guitarra: 'COLE_O_LINK_AQUI', guitarra_isolado: 'COLE_O_LINK_AQUI' }
+            2: { canto: 'https://ia903102.us.archive.org/29/items/castelo-forte-ipalpha-musica-teclado-isolado/Castelo%20Forte%20IPALPHA%20Música%20-%20voz.wav',
+                violao: 'https://ia903102.us.archive.org/29/items/castelo-forte-ipalpha-musica-teclado-isolado/Castelo%20Forte%20IPALPHA%20Música%20-%20violao.wav',
+                teclado: 'https://ia903102.us.archive.org/29/items/castelo-forte-ipalpha-musica-teclado-isolado/Castelo%20Forte%20IPALPHA%20Música%20-%20teclado.wav',
+                teclado_isolado: 'https://ia903102.us.archive.org/29/items/castelo-forte-ipalpha-musica-teclado-isolado/Castelo%20Forte%20IPALPHA%20Música%20-%20teclado%20isolado.wav',
+                guitarra: 'https://ia903102.us.archive.org/29/items/castelo-forte-ipalpha-musica-teclado-isolado/Castelo%20Forte%20IPALPHA%20Música%20-%20guitarra.wav',
+                guitarra_isolado: 'https://ia903102.us.archive.org/29/items/castelo-forte-ipalpha-musica-teclado-isolado/Castelo%20Forte%20IPALPHA%20Música%20-%20guitarra%20e%20violao%20isolado.wav' },
+
+            3: { canto: 'https://ia600707.us.archive.org/28/items/estamos-de-pe-ao-vivo-nazareno-central-music-diego-perensin-g-major-bpm-106_202610/Estamos%20De%20Pé%20%28Ao%20Vivo%29%20-%20playback.wav',
+                violao: 'https://ia600707.us.archive.org/28/items/estamos-de-pe-ao-vivo-nazareno-central-music-diego-perensin-g-major-bpm-106_202610/Estamos%20De%20Pé%20%28Ao%20Vivo%29%20-%20playback.wav',
+                teclado: 'https://ia600707.us.archive.org/28/items/estamos-de-pe-ao-vivo-nazareno-central-music-diego-perensin-g-major-bpm-106_202610/Estamos%20De%20Pé%20%28Ao%20Vivo%29%20-%20playback.wav',
+                teclado_isolado: 'https://ia600707.us.archive.org/28/items/estamos-de-pe-ao-vivo-nazareno-central-music-diego-perensin-g-major-bpm-106_202610/Estamos%20De%20Pé%20%28Ao%20Vivo%29%20-%20playback.wav',
+                guitarra: 'https://ia600707.us.archive.org/28/items/estamos-de-pe-ao-vivo-nazareno-central-music-diego-perensin-g-major-bpm-106_202610/Estamos%20De%20Pé%20%28Ao%20Vivo%29%20-%20playback.wav',
+                guitarra_isolado: 'https://ia600707.us.archive.org/28/items/estamos-de-pe-ao-vivo-nazareno-central-music-diego-perensin-g-major-bpm-106_202610/Estamos%20De%20Pé%20%28Ao%20Vivo%29%20-%20playback.wav' },
+
+            4: { canto: 'https://ia903108.us.archive.org/29/items/teu-povo-teclado/TEU%20POVO%20-%20voz.wav',
+                violao: 'https://ia903108.us.archive.org/29/items/teu-povo-teclado/TEU%20POVO%20-%20guitarra%20e%20violão.wav',
+                teclado: 'https://ia903108.us.archive.org/29/items/teu-povo-teclado/TEU%20POVO%20-%20teclado.wav',
+                teclado_isolado: 'https://ia903108.us.archive.org/29/items/teu-povo-teclado/TEU%20POVO%20-%20teclado%20isolado.wav',
+                guitarra: 'https://ia903108.us.archive.org/29/items/teu-povo-teclado/TEU%20POVO%20-%20guitarra%20e%20violão.wav',
+                guitarra_isolado: 'https://ia903108.us.archive.org/29/items/teu-povo-teclado/TEU%20POVO%20-%20guitarra%20isolada.wav' },
+
+            5: { canto: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20Vineyard%20Piratininga%20%28Clipe%20Oficial%29%20-%20voz.wav',
+                violao: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20guitarra%20e%20violao.wav',
+                teclado: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20teclado.wav',
+                teclado_isolado: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20teclado%20isolado.wav',
+                guitarra: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20guitarra%20e%20violao.wav',
+                guitarra_isolado: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20guitarra%20isolada.wav' }
+        };
+
+        // CONFIGURAÇÕES PRÉ-DEFINIDAS DE METRÔNOMO PARA CADA MÚSICA (bpm e compasso: '4' ou '3')
+        const metronomeConfigs = {
+            1: { bpm: 80, beatsPerMeasure: 3/4 }, // Exemplo: 4/4 a 100 BPM
+            2: { bpm: 120, beatsPerMeasure: 4/4 }, // Exemplo: 4/4 a 110 BPM
+            3: { bpm: 106, beatsPerMeasure: 4/4 }, // Exemplo: 4/4 a 120 BPM
+            4: { bpm: 137,  beatsPerMeasure: 4/4 }, // Exemplo: 4/4 a 95 BPM
+            5: { bpm: 120,  beatsPerMeasure: 4/4 }  // Exemplo: 3/4 a 72 BPM
         };
 
         function selecionarInstrumento(botaoClicado, numMusica, instrumento, nomeExibicao) {
@@ -465,67 +771,63 @@
             statusElement.textContent = nomeExibicao + " - Pronto para reproduzir";
         }
 
-        const metroData = {};
-
-        function mudarBPM(valor, numMusica) {
-            if (!metroData[numMusica]) metroData[numMusica] = { bpm: 120, timer: null, rodando: false };
-            
-            metroData[numMusica].bpm += valor;
-            if (metroData[numMusica].bpm < 40) metroData[numMusica].bpm = 40;
-            if (metroData[numMusica].bpm > 240) metroData[numMusica].bpm = 240;
-            
-            document.getElementById(`bpm-display-${numMusica}`).textContent = metroData[numMusica].bpm + " BPM";
-            
-            if (metroData[numMusica].rodando) {
-                pararMetronomo(numMusica);
-                iniciarMetronomo(numMusica);
-            }
-        }
+        // LÓGICA DO METRÔNOMO COM SUPORTE A 4/4 E 3/4
+        const metroState = {};
 
         function toggleMetronomo(numMusica) {
-            if (!metroData[numMusica]) metroData[numMusica] = { bpm: 120, timer: null, rodando: false };
-            
             const btn = document.getElementById(`btn-metro-${numMusica}`);
             
-            if (metroData[numMusica].rodando) {
+            if (metroState[numMusica] && metroState[numMusica].rodando) {
                 pararMetronomo(numMusica);
-                btn.textContent = "Iniciar";
+                btn.textContent = "Iniciar Metrônomo";
                 btn.classList.remove('active');
             } else {
                 iniciarMetronomo(numMusica);
-                btn.textContent = "Parar";
+                btn.textContent = "Parar Metrônomo";
                 btn.classList.add('active');
             }
         }
 
         function iniciarMetronomo(numMusica) {
-            const dados = metroData[numMusica];
-            dados.rodando = true;
-            const intervalo = (60 / dados.bpm) * 1000;
+            const config = metronomeConfigs[numMusica];
+            const intervalo = (60 / config.bpm) * 1000;
             
-            tocarClickAudio();
-            dados.timer = setInterval(() => {
-                tocarClickAudio();
+            metroState[numMusica] = {
+                rodando: true,
+                currentBeat: 0,
+                timer: null
+            };
+            
+            // Toca o primeiro tempo (forte) imediatamente
+            tocarClick(true);
+            metroState[numMusica].currentBeat = 1;
+            
+            metroState[numMusica].timer = setInterval(() => {
+                const isFirstBeat = (metroState[numMusica].currentBeat === 0);
+                tocarClick(isFirstBeat);
+                
+                metroState[numMusica].currentBeat = (metroState[numMusica].currentBeat + 1) % config.beatsPerMeasure;
             }, intervalo);
         }
 
         function pararMetronomo(numMusica) {
-            if (metroData[numMusica]) {
-                clearInterval(metroData[numMusica].timer);
-                metroData[numMusica].rodando = false;
+            if (metroState[numMusica]) {
+                clearInterval(metroState[numMusica].timer);
+                metroState[numMusica].rodando = false;
             }
         }
 
-        function tocarClickAudio() {
+        function tocarClick(isFirstBeat) {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const osc = audioCtx.createOscillator();
                 const envelope = audioCtx.createGain();
                 
                 osc.type = 'sine';
-                osc.frequency.value = 1000;
+                // Primeiro tempo (Cabeça do compasso) é mais agudo/forte
+                osc.frequency.value = isFirstBeat ? 1200 : 800;
                 
-                envelope.gain.setValueAtTime(1, audioCtx.currentTime);
+                envelope.gain.setValueAtTime(isFirstBeat ? 1.2 : 0.7, audioCtx.currentTime);
                 envelope.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
                 
                 osc.connect(envelope);
