@@ -219,7 +219,6 @@
             letter-spacing: 1px;
         }
 
-        /* Usando tag <pre> com fonte monoespaçada para respeitar 100% os espaços e alinhamentos */
         pre.lyrics-text {
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.9rem;
@@ -274,7 +273,7 @@
                 <audio id="audio-1" controls preload="auto"><source id="source-1" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div class="metronome-info">Metrônomo<br><span id="metro-label-1" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 100 BPM</span></div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-1" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 3/4 | 80 BPM</span></div>
                 <button class="btn-metro" id="btn-metro-1" onclick="toggleMetronomo(1)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
@@ -374,7 +373,7 @@ Estão firma - dos no Senhor
                 <audio id="audio-2" controls preload="auto"><source id="source-2" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div class="metronome-info">Metrônomo<br><span id="metro-label-2" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 110 BPM</span></div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-2" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 120 BPM</span></div>
                 <button class="btn-metro" id="btn-metro-2" onclick="toggleMetronomo(2)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
@@ -453,7 +452,7 @@ F#m       D               A
                 <audio id="audio-3" controls preload="auto"><source id="source-3" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div class="metronome-info">Metrônomo<br><span id="metro-label-3" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 120 BPM</span></div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-3" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 106 BPM</span></div>
                 <button class="btn-metro" id="btn-metro-3" onclick="toggleMetronomo(3)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
@@ -639,7 +638,7 @@ C/E G</pre>
                 <audio id="audio-4" controls preload="auto"><source id="source-4" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div class="metronome-info">Metrônomo<br><span id="metro-label-4" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 95 BPM</span></div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-4" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 137 BPM</span></div>
                 <button class="btn-metro" id="btn-metro-4" onclick="toggleMetronomo(4)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
@@ -672,7 +671,7 @@ C/E G</pre>
                 <audio id="audio-5" controls preload="auto"><source id="source-5" src="" type="audio/mpeg"></audio>
             </div>
             <div class="metronome-section">
-                <div class="metronome-info">Metrônomo<br><span id="metro-label-5" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 3/4 | 95 BPM</span></div>
+                <div class="metronome-info">Metrônomo<br><span id="metro-label-5" style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">Compasso: 4/4 | 120 BPM</span></div>
                 <button class="btn-metro" id="btn-metro-5" onclick="toggleMetronomo(5)">Iniciar Metrônomo</button>
             </div>
             <div class="lyrics-container">
@@ -723,13 +722,13 @@ C/E G</pre>
                 guitarra_isolado: 'https://ia600406.us.archive.org/23/items/meu-respirar-guitarra-e-violao/Meu%20Respirar%20-%20guitarra%20isolada.wav' }
         };
 
-        // CONFIGURAÇÕES ATUALIZADAS E CORRETAS EXATAMENTE CONFORME SOLICITADO
+        // CONFIGURAÇÕES EXATAS DE BPM E COMPASSO CORRIGIDAS
         const metronomeConfigs = {
-            1: { bpm: 80, beatsPerMeasure: 3 }, // Música 1: 4/4 | 100 BPM
-            2: { bpm: 120, beatsPerMeasure: 4 }, // Música 2: 4/4 | 110 BPM
-            3: { bpm: 106, beatsPerMeasure: 4 }, // Música 3: 4/4 | 120 BPM
-            4: { bpm: 137,  beatsPerMeasure: 4 }, // Música 4: 4/4 | 95 BPM
-            5: { bpm: 120,  beatsPerMeasure: 4 }  // Música 5: 3/4 | 95 BPM (corrigido para compasso 3/4)
+            1: { bpm: 80,  beatsPerMeasure: 3 }, // 1: 80 bpm 3/4
+            2: { bpm: 120, beatsPerMeasure: 4 }, // 2: 120 bpm 4/4
+            3: { bpm: 106, beatsPerMeasure: 4 }, // 3: 106 bpm 4/4
+            4: { bpm: 137, beatsPerMeasure: 4 }, // 4: 137 bpm 4/4
+            5: { bpm: 120, beatsPerMeasure: 4 }  // 5: 120 bpm 4/4
         };
 
         function selecionarInstrumento(botaoClicado, numMusica, instrumento, nomeExibicao) {
@@ -775,7 +774,7 @@ C/E G</pre>
             statusElement.textContent = nomeExibicao + " - Pronto para reproduzir";
         }
 
-        // LÓGICA DO METRÔNOMO
+        // LÓGICA DO METRÔNOMO CORRIGIDA
         const metroState = {};
 
         function toggleMetronomo(numMusica) {
@@ -802,6 +801,7 @@ C/E G</pre>
                 timer: null
             };
             
+            // Toca o primeiro tempo forte imediatamente
             tocarClick(true);
             metroState[numMusica].currentBeat = 1;
             
@@ -827,6 +827,7 @@ C/E G</pre>
                 const envelope = audioCtx.createGain();
                 
                 osc.type = 'sine';
+                // Primeiro tempo do compasso mais agudo/forte
                 osc.frequency.value = isFirstBeat ? 1200 : 800;
                 
                 envelope.gain.setValueAtTime(isFirstBeat ? 1.2 : 0.7, audioCtx.currentTime);
